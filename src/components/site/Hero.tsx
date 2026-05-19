@@ -150,13 +150,13 @@ export function Hero() {
       {/* trusted-by strip */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 mt-20 md:mt-28">
         <div className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground text-center">
-          Trusted by leading hospitals across Saharsa
+          Supplying hospitals, nursing homes &amp; doctors across Saharsa &amp; Kosi region
         </div>
         <div className="mt-5 marquee-mask overflow-hidden">
           <div className="flex gap-10 md:gap-16 animate-marquee whitespace-nowrap text-foreground/40">
             {[...Array(2)].map((_, k) => (
               <div key={k} className="flex gap-10 md:gap-16 shrink-0">
-                {["SWARAJ Hospital", "Kaushik Hospital", "Aarogya Mandir", "Pranjal Shri", "SR Hospital", "Sunrise Hospital", "Madhav Hospital"].map((n) => (
+                {["Surya Hospital", "Madhav Hospital", "Kiran Aditya Hospital", "Cure Hospital", "Parvati Hospital", "Dev Hospital", "Satyam Hospital", "Vaishnavi Nursing Home", "Aarog Mandir Hospital"].map((n) => (
                   <span key={n + k} className="font-display text-lg md:text-2xl font-semibold tracking-tight">{n}</span>
                 ))}
               </div>
