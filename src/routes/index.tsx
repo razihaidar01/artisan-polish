@@ -4,6 +4,7 @@ import { Hero } from "@/components/site/Hero";
 import { Trust } from "@/components/site/Trust";
 import { About } from "@/components/site/About";
 import { Services } from "@/components/site/Services";
+import { Coverage } from "@/components/site/Coverage";
 import { Hospitals } from "@/components/site/Hospitals";
 import { Reveal } from "@/components/site/Reveal";
 import { ArrowUpRight, Phone } from "lucide-react";
@@ -69,6 +70,7 @@ function Index() {
       <Trust />
       <About />
       <Services preview />
+      <Coverage />
       <Hospitals />
 
       {/* Final CTA */}
