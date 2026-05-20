@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Phone, Menu, X, MessageCircle, ArrowUpRight } from "lucide-react";
+import { Phone, Menu, X, MessageCircle, ShieldCheck, ArrowRight } from "lucide-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import logo from "@/assets/kga-logo.png";
 
 const links = [
   { label: "Home", to: "/" as const },
-  { label: "About", to: "/about" as const },
+  { label: "About Us", to: "/about" as const },
   { label: "Services", to: "/services" as const },
-  { label: "Contact", to: "/contact" as const },
+  { label: "Products", to: "/services" as const, hash: "products" },
+  { label: "Contact Us", to: "/contact" as const },
 ];
 
 export function Navbar() {
@@ -16,7 +17,7 @@ export function Navbar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -26,65 +27,77 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled ? "py-2" : "py-3"
+      className={`fixed top-0 inset-x-0 z-50 bg-white border-b border-border transition-shadow ${
+        scrolled ? "shadow-soft" : ""
       }`}
     >
-      <nav
-        className={`mx-auto max-w-7xl px-3 sm:px-4 transition-all duration-500 ${
-          scrolled ? "" : ""
-        }`}
-      >
-        <div
-          className={`flex items-center justify-between rounded-full transition-all duration-500 ${
-            scrolled
-              ? "glass shadow-elegant px-3 md:px-4 h-14 md:h-16"
-              : "bg-transparent px-2 md:px-3 h-14 md:h-16"
-          }`}
-        >
-          <Link to="/" className="flex items-center gap-2.5 group pl-1">
-            <div className="h-9 w-9 md:h-10 md:w-10 rounded-xl bg-white shadow-soft flex items-center justify-center ring-1 ring-border transition-transform group-hover:scale-105">
-              <img src={logo} alt="Koshi Gas Agency" className="h-7 md:h-8 w-auto object-contain" />
+      {/* Top utility strip */}
+      <div className="hidden md:block bg-[var(--brand-navy)] text-white/85 text-[12px]">
+        <div className="mx-auto max-w-7xl px-4 flex items-center justify-between h-8">
+          <div className="flex items-center gap-4">
+            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5" /> ISI Certified · Trusted Supplier</span>
+            <span className="opacity-60">|</span>
+            <span>24×7 Emergency Support</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <a href="mailto:koshigasagency@gmail.com" className="hover:text-white transition-colors">koshigasagency@gmail.com</a>
+            <span className="opacity-60">|</span>
+            <a href="tel:7004879171" className="hover:text-white transition-colors inline-flex items-center gap-1.5"><Phone className="h-3.5 w-3.5" /> +91 7004879171</a>
+          </div>
+        </div>
+      </div>
+
+      <nav className="mx-auto max-w-7xl px-4">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* LEFT: Logo + Company name */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="h-11 w-11 md:h-12 md:w-12 bg-white border border-border flex items-center justify-center">
+              <img src={logo} alt="Koshi Gas Agency" className="h-8 md:h-9 w-auto object-contain" />
             </div>
-            <div className="leading-tight hidden sm:block">
-              <div className="font-bold text-foreground text-sm md:text-[15px] tracking-tight">Koshi Gas Agency</div>
-              <div className="text-[10px] text-muted-foreground tracking-wide">Your Trust, Our Energy</div>
+            <div className="leading-tight">
+              <div className="font-display font-bold text-[var(--brand-navy)] text-[15px] md:text-[17px] tracking-tight uppercase">Koshi Gas Agency</div>
+              <div className="text-[10px] md:text-[11px] text-muted-foreground tracking-[0.12em] uppercase">Medical &amp; Industrial Gas</div>
             </div>
           </Link>
 
-          <div className="hidden md:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
+          {/* CENTER: Nav */}
+          <div className="hidden lg:flex items-center gap-1">
             {links.map((l) => (
               <Link
-                key={l.to}
+                key={l.label}
                 to={l.to}
+                hash={l.hash}
                 activeOptions={{ exact: l.to === "/" }}
-                className="relative px-3.5 py-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors data-[status=active]:text-primary data-[status=active]:font-semibold"
+                className="px-3.5 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-foreground/75 hover:text-[var(--brand-navy)] transition-colors data-[status=active]:text-[var(--brand-navy)] data-[status=active]:border-b-2 data-[status=active]:border-[var(--brand-red)]"
               >
                 {l.label}
               </Link>
             ))}
           </div>
 
-          <div className="flex items-center gap-1.5">
+          {/* RIGHT: Trust badge + CTA */}
+          <div className="flex items-center gap-2">
+            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 border border-border text-[10px] uppercase tracking-[0.12em] text-foreground/70">
+              <ShieldCheck className="h-3.5 w-3.5 text-[var(--brand-navy)]" /> ISO Quality
+            </div>
             <a
               href="https://wa.me/917004879171"
               target="_blank"
               rel="noreferrer"
               aria-label="WhatsApp"
-              className="hidden sm:inline-flex h-10 w-10 items-center justify-center rounded-full bg-[oklch(0.62_0.16_155)]/10 text-[oklch(0.45_0.16_155)] ring-1 ring-[oklch(0.62_0.16_155)]/30 hover:bg-[oklch(0.62_0.16_155)]/20 transition-colors"
+              className="hidden sm:inline-flex h-10 w-10 items-center justify-center border border-border text-[#16794a] hover:bg-secondary transition-colors"
             >
               <MessageCircle className="h-4 w-4" />
             </a>
-            <a
-              href="tel:7004879171"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-foreground text-background px-4 py-2.5 text-sm font-semibold hover:bg-primary transition-colors"
+            <Link
+              to="/contact"
+              className="hidden sm:inline-flex items-center gap-2 bg-[var(--brand-red)] text-white px-5 py-2.5 text-[12px] font-bold uppercase tracking-[0.1em] hover:bg-[#b30000] transition-colors"
             >
-              <Phone className="h-3.5 w-3.5" /> Contact
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </a>
+              Get Quote <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
             <button
               onClick={() => setOpen((v) => !v)}
-              className="md:hidden h-10 w-10 rounded-full flex items-center justify-center glass"
+              className="lg:hidden h-10 w-10 flex items-center justify-center border border-border"
               aria-label="Toggle menu"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -93,33 +106,26 @@ export function Navbar() {
         </div>
 
         {open && (
-          <div className="md:hidden mt-2 glass rounded-3xl shadow-elegant overflow-hidden animate-fade-up">
-            <div className="px-3 py-3 flex flex-col gap-0.5">
+          <div className="lg:hidden border-t border-border bg-white animate-fade-up">
+            <div className="py-2 flex flex-col">
               {links.map((l) => (
                 <Link
-                  key={l.to}
+                  key={l.label}
                   to={l.to}
+                  hash={l.hash}
                   activeOptions={{ exact: l.to === "/" }}
-                  className="px-4 py-3.5 rounded-2xl text-foreground/85 font-medium hover:bg-white/60 data-[status=active]:bg-white data-[status=active]:text-primary"
+                  className="px-4 py-3.5 text-[13px] font-semibold uppercase tracking-[0.08em] text-foreground/80 border-b border-border hover:bg-secondary data-[status=active]:text-[var(--brand-navy)] data-[status=active]:bg-secondary"
                 >
                   {l.label}
                 </Link>
               ))}
-              <div className="grid grid-cols-2 gap-2 mt-2 px-1 pb-1">
-                <a
-                  href="tel:7004879171"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground text-background px-4 py-3 text-sm font-semibold"
-                >
+              <div className="grid grid-cols-2 gap-2 p-3">
+                <a href="tel:7004879171" className="inline-flex items-center justify-center gap-2 bg-[var(--brand-navy)] text-white px-4 py-3 text-[12px] font-bold uppercase tracking-[0.08em]">
                   <Phone className="h-4 w-4" /> Call
                 </a>
-                <a
-                  href="https://wa.me/917004879171"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[oklch(0.55_0.18_155)] text-white px-4 py-3 text-sm font-semibold"
-                >
-                  <MessageCircle className="h-4 w-4" /> WhatsApp
-                </a>
+                <Link to="/contact" className="inline-flex items-center justify-center gap-2 bg-[var(--brand-red)] text-white px-4 py-3 text-[12px] font-bold uppercase tracking-[0.08em]">
+                  Get Quote
+                </Link>
               </div>
             </div>
           </div>
