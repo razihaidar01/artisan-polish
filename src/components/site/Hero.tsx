@@ -1,167 +1,118 @@
-import { Phone, MessageCircle, ShieldCheck, Activity, ArrowUpRight } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import owner from "@/assets/owner-hero.jpg";
+import { Phone, MessageCircle, ShieldCheck, Headphones, Truck, ArrowRight, ImageIcon } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Reveal } from "./Reveal";
 
 export function Hero() {
-  const ref = useRef<HTMLElement | null>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yImg = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const yBlobA = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const yBlobB = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const opacityFade = useTransform(scrollYProgress, [0, 0.8], [1, 0.4]);
-
   return (
-    <section ref={ref} id="home" className="relative pt-28 md:pt-36 pb-20 md:pb-32 overflow-hidden bg-gradient-hero">
-      {/* grid + noise atmosphere */}
-      <div className="absolute inset-0 grid-bg opacity-50 pointer-events-none" />
-      <div className="absolute inset-0 noise opacity-[0.35] mix-blend-multiply pointer-events-none" />
+    <section id="home" className="relative pt-28 md:pt-36 pb-16 md:pb-24 bg-white border-b border-border overflow-hidden">
+      <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
 
-      {/* mesh blobs */}
-      <motion.div style={{ y: yBlobA }} className="absolute -top-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-gradient-mesh blur-3xl opacity-70 pointer-events-none" />
-      <motion.div style={{ y: yBlobB }} className="absolute -bottom-48 -right-32 h-[32rem] w-[32rem] rounded-full bg-primary-glow/25 blur-3xl pointer-events-none" />
-
-      <motion.div style={{ opacity: opacityFade }} className="relative mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-        {/* LEFT */}
-        <div className="lg:col-span-7 relative z-10">
-          <Reveal as="div">
-            <span className="inline-flex items-center gap-2 rounded-full glass px-3.5 py-1.5 text-[11px] font-semibold text-primary uppercase tracking-[0.18em] shadow-soft">
-              <span className="relative h-1.5 w-1.5 rounded-full bg-success animate-pulse-ring text-success" />
-              Saharsa · Bihar
-              <span className="text-muted-foreground/60">·</span>
-              <span className="font-hindi normal-case tracking-normal text-foreground/70">मेडिकल & इंडस्ट्रियल गैस</span>
-            </span>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        {/* LEFT: Copy */}
+        <div className="lg:col-span-6">
+          <Reveal>
+            <div className="inline-flex items-center gap-2 border border-border bg-secondary px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--brand-navy)]">
+              <span className="h-1.5 w-1.5 bg-[var(--brand-red)]" />
+              Saharsa, Bihar · Est. Industrial Supplier
+            </div>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <h1 className="mt-6 text-[2.4rem] sm:text-5xl md:text-6xl lg:text-[4.4rem] leading-[1.02] tracking-tight font-bold text-foreground text-balance">
-              <span className="font-serif italic font-normal text-foreground/90">Trusted</span>{" "}
-              medical &{" "}
-              <span className="text-gradient">industrial</span>
-              <br />
-              gas, delivered with care.
+          <Reveal delay={0.05}>
+            <h1 className="mt-5 font-display font-bold uppercase text-[2.1rem] sm:text-5xl lg:text-[3.4rem] leading-[1.08] tracking-tight text-[var(--brand-navy)] text-balance">
+              Reliable Medical &amp; Industrial Gas Solutions
             </h1>
           </Reveal>
 
+          <Reveal delay={0.1}>
+            <p className="mt-5 text-base md:text-lg text-foreground/75 max-w-xl leading-relaxed">
+              Trusted supply and engineering support for hospitals, laboratories, fabrication units, industries and institutional operations across Bihar.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.15}>
+            <p className="font-hindi mt-3 text-sm md:text-base text-muted-foreground max-w-xl">
+              अस्पतालों, उद्योगों एवं संस्थानों के लिए भरोसेमंद मेडिकल और इंडस्ट्रियल गैस सेवा।
+            </p>
+          </Reveal>
+
           <Reveal delay={0.2}>
-            <p className="font-hindi mt-5 text-lg md:text-xl text-foreground/80 max-w-xl leading-relaxed">
-              सहारसा की भरोसेमंद मेडिकल एवं इंडस्ट्रियल गैस सेवा।
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.28}>
-            <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-lg leading-relaxed">
-              Premium gas solutions for hospitals, laboratories, institutions and industries across Bihar — with 24×7 emergency response.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.36}>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-primary text-primary-foreground px-6 py-3.5 text-sm md:text-base font-semibold shadow-elegant hover:shadow-glow transition-all hover:-translate-y-0.5"
+            <div className="mt-7 flex flex-wrap gap-2.5">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-[var(--brand-red)] text-white px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.1em] hover:bg-[#b30000] transition-colors"
               >
-                <Phone className="h-4 w-4" /> Contact Now
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                Request Support <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-[var(--brand-navy)] text-white px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.1em] hover:bg-[var(--primary)] transition-colors"
+              >
+                Get Quote
+              </Link>
+              <a
+                href="tel:7004879171"
+                className="inline-flex items-center gap-2 border border-border bg-white text-[var(--brand-navy)] px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.1em] hover:bg-secondary transition-colors"
+              >
+                <Phone className="h-3.5 w-3.5" /> Contact Now
               </a>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.25}>
+            <div className="mt-8 pt-6 border-t border-border flex flex-wrap items-center gap-x-6 gap-y-2 text-[12px] text-muted-foreground">
+              <div className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--brand-navy)]" /> 24×7 Support</div>
+              <div className="flex items-center gap-2"><Truck className="h-4 w-4 text-[var(--brand-navy)]" /> Safe Supply</div>
+              <div className="flex items-center gap-2"><Headphones className="h-4 w-4 text-[var(--brand-navy)]" /> Trusted Service Network</div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* RIGHT: Industrial image placeholder */}
+        <div className="lg:col-span-6">
+          <Reveal delay={0.1}>
+            <div className="relative">
+              <div className="relative aspect-[4/3] w-full overflow-hidden border border-border bg-[var(--brand-navy)]">
+                {/* Industrial pattern atmosphere */}
+                <div className="absolute inset-0 opacity-30" style={{
+                  backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 14px)",
+                }} />
+                {/* Dark blue overlay */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-[var(--brand-navy)]/95 via-[var(--brand-navy)]/70 to-transparent" />
+                {/* Placeholder marker */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="flex flex-col items-center gap-3 text-white/70">
+                    <ImageIcon className="h-10 w-10" strokeWidth={1.2} />
+                    <div className="text-center px-4">
+                      <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-white/55">Image · to be replaced</div>
+                      <div className="mt-1 text-sm font-semibold uppercase tracking-[0.08em]">Indian Industrial Gas Plant<br/>or Oxygen Cylinder Warehouse</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Corner badge */}
+                <div className="absolute top-4 left-4 bg-white text-[var(--brand-navy)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] border border-white">
+                  O₂ · 99.5% Pure
+                </div>
+                {/* Bottom spec strip */}
+                <div className="absolute bottom-0 inset-x-0 bg-black/40 backdrop-blur-sm px-4 py-3 flex items-center justify-between text-white text-[11px] font-mono uppercase tracking-[0.14em]">
+                  <span>ISI Certified</span>
+                  <span className="text-white/60">|</span>
+                  <span>10+ Years</span>
+                  <span className="text-white/60">|</span>
+                  <span>5000+ Deliveries</span>
+                </div>
+              </div>
+
+              {/* WhatsApp pill below image */}
               <a
                 href="https://wa.me/917004879171"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full glass text-foreground px-6 py-3.5 text-sm md:text-base font-semibold hover:bg-white transition-colors"
+                className="mt-3 inline-flex items-center gap-2 text-[12px] font-semibold text-[#16794a] hover:underline"
               >
-                <MessageCircle className="h-4 w-4 text-[oklch(0.55_0.18_155)]" /> WhatsApp
+                <MessageCircle className="h-4 w-4" /> Chat on WhatsApp · +91 7004879171
               </a>
             </div>
           </Reveal>
-
-          <Reveal delay={0.44}>
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs md:text-sm text-muted-foreground">
-              <div className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-primary" /> ISI-certified cylinders</div>
-              <div className="hidden sm:flex items-center gap-2"><Activity className="h-4 w-4 text-primary" /> 24×7 emergency desk</div>
-              <div className="flex items-center gap-2 font-hindi"><span className="h-1 w-1 rounded-full bg-primary" /> 5000+ सप्लाई पूरी</div>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* RIGHT */}
-        <div className="lg:col-span-5 relative">
-          {/* glow halo */}
-          <div className="absolute -inset-6 -z-10 bg-gradient-primary opacity-25 blur-3xl rounded-[3rem]" />
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-            style={{ y: yImg }}
-            className="relative rounded-[2rem] overflow-hidden ring-1 ring-white/40 shadow-elegant bg-white"
-          >
-            <img
-              src={owner}
-              alt="Sanjay Singh — Founder, Koshi Gas Agency, with industrial oxygen cylinders"
-              className="w-full h-auto object-cover"
-              width={1536}
-              height={1024}
-              fetchPriority="high"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent pointer-events-none" />
-
-            {/* floating spec card */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="absolute top-4 left-4 glass rounded-2xl px-3 py-2 text-[11px] font-mono uppercase tracking-wider text-foreground shadow-soft"
-            >
-              <div className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-success" /> O₂ · 99.5% pure</div>
-            </motion.div>
-          </motion.div>
-
-          {/* owner card overlay */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="absolute -bottom-7 left-4 right-4 md:-bottom-8 md:left-6 md:right-6 glass rounded-2xl px-4 py-3.5 md:px-5 md:py-4 flex items-center justify-between shadow-elegant"
-          >
-            <div className="min-w-0">
-              <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Founder</div>
-              <div className="font-semibold text-foreground text-sm md:text-base truncate">Sanjay Singh</div>
-              <div className="font-hindi text-[11px] text-muted-foreground mt-0.5">मालिक · Koshi Gas Agency</div>
-            </div>
-            <a href="tel:7004879171" className="rounded-full bg-gradient-primary text-primary-foreground p-3 shadow-soft hover:shadow-glow transition-shadow shrink-0" aria-label="Call founder">
-              <Phone className="h-4 w-4" />
-            </a>
-          </motion.div>
-
-          {/* floating badge */}
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="hidden md:flex absolute -top-6 -right-4 glass rounded-2xl px-4 py-3 shadow-elegant items-center gap-3"
-          >
-            <div className="font-display text-3xl font-bold text-gradient leading-none">10+</div>
-            <div className="text-[11px] leading-tight text-muted-foreground">Years<br />of Trust</div>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* trusted-by strip */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 mt-20 md:mt-28">
-        <div className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground text-center">
-          Supplying hospitals, nursing homes &amp; doctors across Saharsa &amp; Kosi region
-        </div>
-        <div className="mt-5 marquee-mask overflow-hidden">
-          <div className="flex gap-10 md:gap-16 animate-marquee whitespace-nowrap text-foreground/40">
-            {[...Array(2)].map((_, k) => (
-              <div key={k} className="flex gap-10 md:gap-16 shrink-0">
-                {["Surya Hospital", "Madhav Hospital", "Kiran Aditya Hospital", "Cure Hospital", "Parvati Hospital", "Dev Hospital", "Satyam Hospital", "Vaishnavi Nursing Home", "Aarog Mandir Hospital"].map((n) => (
-                  <span key={n + k} className="font-display text-lg md:text-2xl font-semibold tracking-tight">{n}</span>
-                ))}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

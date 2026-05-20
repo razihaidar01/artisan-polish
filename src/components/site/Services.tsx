@@ -1,24 +1,7 @@
 import {
-  Wind,
-  FlaskConical,
-  Atom,
-  Stethoscope,
-  HeartPulse,
-  Factory,
-  ArrowUpRight,
-  CircleDot,
-  Wrench,
-  Hammer,
-  Cylinder,
-  Snowflake,
-  PhoneCall,
-  ShieldAlert,
-  HardHat,
-  Flame,
-  Zap,
-  Truck,
-  Container,
-  type LucideIcon,
+  Wind, FlaskConical, Atom, Stethoscope, HeartPulse, Factory, CircleDot,
+  Wrench, Cylinder, Snowflake, PhoneCall, ShieldAlert, HardHat, Flame, Zap,
+  Truck, Container, ImageIcon, ArrowRight, type LucideIcon,
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Stagger, StaggerItem, Reveal } from "./Reveal";
@@ -27,144 +10,215 @@ export type Service = {
   slug: string;
   icon: LucideIcon;
   title: string;
-  hindi?: string;
   desc: string;
-  formula?: string;
+  bullets: string[];
+  placeholder: string;
 };
 
 export type ServiceCategory = {
   id: string;
-  eyebrow: string;
+  no: string;
   title: string;
-  hindi?: string;
   intro: string;
   items: Service[];
 };
 
 export const serviceCategories: ServiceCategory[] = [
   {
-    id: "gas-supply",
-    eyebrow: "01 · Gas supply",
-    title: "Medical & industrial gas supply",
-    hindi: "मेडिकल एवं इंडस्ट्रियल गैस आपूर्ति",
-    intro:
-      "Bulk and cylinder supply of pharmacopoeia-grade and industrial-grade gases — delivered on schedule with proper documentation.",
+    id: "medical-gas",
+    no: "01",
+    title: "Medical Gas Services",
+    intro: "Reliable medical-grade gas supply and hospital infrastructure support for ICUs, operation theatres, wards and home patients.",
     items: [
-      { slug: "oxygen", icon: Wind, title: "Oxygen Gas Supply", hindi: "ऑक्सीजन गैस", formula: "O₂", desc: "Medical and industrial oxygen in ISI-certified cylinders for hospitals, ICUs, home patients and workshops." },
-      { slug: "nitrogen", icon: FlaskConical, title: "Nitrogen Gas Supply", hindi: "नाइट्रोजन गैस", formula: "N₂", desc: "High-purity nitrogen for laboratories, food packaging, electronics and industrial inerting applications." },
-      { slug: "helium", icon: Atom, title: "Helium Gas Supply", hindi: "हीलियम", formula: "He", desc: "Reliable helium supply for MRI installations, research labs and specialty industrial work." },
-      { slug: "co2", icon: CircleDot, title: "CO₂ Gas Supply", hindi: "कार्बन डाइऑक्साइड", formula: "CO₂", desc: "Food-grade and industrial CO₂ for beverages, fire systems, welding and process applications." },
+      { slug: "oxygen", icon: Wind, title: "Oxygen Gas Supply",
+        desc: "Medical-grade oxygen supply for hospitals, ICUs and home patients in ISI-certified cylinders.",
+        bullets: ["Pharmacopoeia-grade O₂", "ISI-certified cylinders", "Scheduled & emergency delivery"],
+        placeholder: "Indian Oxygen Cylinder Image" },
+      { slug: "icu-pipeline", icon: HeartPulse, title: "ICU Pipeline Setup",
+        desc: "Bed-head panels, outlets and changeover systems for ICU and operation theatre commissioning.",
+        bullets: ["Bed-head panel installation", "Alarm & isolation valves", "Commissioning support"],
+        placeholder: "ICU Pipeline Installation" },
+      { slug: "mgps", icon: Stethoscope, title: "Medical Gas Pipeline",
+        desc: "Turnkey MGPS design and installation for oxygen, vacuum, N₂O and compressed air lines.",
+        bullets: ["Hospital MGPS design", "Pressure testing & validation", "Maintenance contracts"],
+        placeholder: "Hospital Medical Gas Pipeline" },
+      { slug: "emergency-cylinder", icon: PhoneCall, title: "Emergency Cylinder Support",
+        desc: "24×7 dispatch of medical oxygen cylinders for hospitals and home patients across the region.",
+        bullets: ["24×7 emergency desk", "Priority hospital dispatch", "Same-day refill"],
+        placeholder: "Emergency Oxygen Supply" },
+      { slug: "hospital-support", icon: Truck, title: "Hospital Gas Support",
+        desc: "Standing supply arrangement for hospitals — predictable refill cycles and on-call response.",
+        bullets: ["Standing supply contracts", "Documented dispatch", "Dedicated coordinator"],
+        placeholder: "Hospital Oxygen Supply" },
+      { slug: "plant-install", icon: Factory, title: "Oxygen Plant Installation",
+        desc: "Turnkey PSA oxygen plant installation with civil coordination, piping, electrical and commissioning.",
+        bullets: ["PSA plant turnkey", "Site & civil coordination", "Commissioning & handover"],
+        placeholder: "Oxygen Plant Installation" },
+      { slug: "plant-maintenance", icon: Wrench, title: "Oxygen Plant Maintenance",
+        desc: "Annual maintenance contracts with periodic compressor, sieve-bed and purity checks.",
+        bullets: ["AMC support", "Sieve-bed servicing", "Purity monitoring"],
+        placeholder: "Oxygen Plant Maintenance" },
+      { slug: "icu-maintenance", icon: HardHat, title: "ICU Maintenance & Servicing",
+        desc: "Scheduled servicing and breakdown response for installed ICU gas systems.",
+        bullets: ["Scheduled servicing", "Breakdown response", "Spare-parts support"],
+        placeholder: "ICU Maintenance" },
     ],
   },
   {
-    id: "hospital",
-    eyebrow: "02 · Hospital infrastructure",
-    title: "Medical gas pipeline & ICU setup",
-    hindi: "मेडिकल गैस पाइपलाइन एवं ICU सेटअप",
-    intro:
-      "Design, installation and ongoing maintenance of hospital medical gas systems — from a single ward to a full ICU/OT block.",
+    id: "industrial-gas",
+    no: "02",
+    title: "Industrial Gas Services",
+    intro: "Day-to-day gas, equipment and safety supply for fabrication shops, workshops and industrial project sites.",
     items: [
-      { slug: "mgps", icon: Stethoscope, title: "Medical Gas Pipeline Installation", desc: "End-to-end MGPS design and installation for hospitals — oxygen, vacuum, nitrous oxide and compressed air lines with proper isolation and alarms." },
-      { slug: "icu-setup", icon: HeartPulse, title: "ICU Setup Support", desc: "Bed-head panels, outlet points, manifolds and changeover systems for ICU and operation theatre commissioning." },
-      { slug: "pipeline-maintenance", icon: Wrench, title: "Gas Pipeline Maintenance", desc: "Scheduled servicing, leak testing and AMC support for existing hospital gas pipelines." },
-    ],
-  },
-  {
-    id: "oxygen-plant",
-    eyebrow: "03 · Oxygen plant",
-    title: "Oxygen plant installation & service",
-    hindi: "ऑक्सीजन प्लांट इंस्टॉलेशन एवं सर्विस",
-    intro:
-      "On-site PSA oxygen plant projects for hospitals and institutions — built to run reliably in real Indian conditions.",
-    items: [
-      { slug: "plant-installation", icon: Factory, title: "Oxygen Plant Installation", desc: "Turnkey PSA oxygen plant installation with civil coordination, piping, electrical and commissioning." },
-      { slug: "plant-maintenance", icon: Wrench, title: "Oxygen Plant Maintenance", desc: "Annual maintenance contracts with periodic checks on compressors, sieve beds, filters and purity monitoring." },
-      { slug: "plant-servicing", icon: HardHat, title: "Oxygen Plant Servicing", desc: "Breakdown response, overhauling and spare-parts servicing for existing PSA plants — including third-party units." },
-    ],
-  },
-  {
-    id: "tanks",
-    eyebrow: "04 · Tanks & commissioning",
-    title: "Liquid tanks — installation & commissioning",
-    hindi: "लिक्विड टैंक इंस्टॉलेशन",
-    intro:
-      "Site survey, civil coordination, erection and commissioning of cryogenic and bulk gas tanks for hospitals and industries.",
-    items: [
-      { slug: "lox-tank", icon: Container, title: "Liquid Oxygen Tank Installation", desc: "Site preparation, foundation review and installation of liquid oxygen (LOX) storage tanks with vaporiser and control lines." },
-      { slug: "oxygen-erection", icon: HardHat, title: "Oxygen Tank Erection & Commissioning", desc: "Mechanical erection, piping, pressure testing and commissioning of oxygen storage installations." },
-      { slug: "n2-tank", icon: Container, title: "Nitrogen Tank Installation", desc: "Bulk liquid nitrogen tank installation for industrial users — including transfer lines and venting setup." },
-      { slug: "co2-tank", icon: Container, title: "CO₂ Tank Installation", desc: "Bulk CO₂ storage tank installation for beverage plants, fabrication units and food processing." },
-    ],
-  },
-  {
-    id: "industrial",
-    eyebrow: "05 · Industrial support",
-    title: "Industrial gas, welding & cutting",
-    hindi: "इंडस्ट्रियल गैस एवं वेल्डिंग सपोर्ट",
-    intro:
-      "Day-to-day gas, equipment and safety supply for fabrication shops, workshops and project sites.",
-    items: [
-      { slug: "industrial-support", icon: Factory, title: "Industrial Gas Support", desc: "Ongoing supply of oxygen, argon, nitrogen and gas mixtures for fabrication, manufacturing and project sites." },
-      { slug: "welding-gas", icon: Zap, title: "Welding Gas Supply", desc: "Argon, CO₂ and mixed welding gases in standard cylinders — with bulk pricing for ongoing projects." },
-      { slug: "cutting-gas", icon: Flame, title: "Cutting Gas Supply", desc: "DA (dissolved acetylene), LPG and oxygen for gas cutting — supplied in tested, ISI-certified cylinders." },
-      { slug: "carbide-tank", icon: Cylinder, title: "Carbide Tank", desc: "Calcium carbide supply and carbide tank servicing for acetylene generation in fabrication units." },
-      { slug: "gas-cutter", icon: Flame, title: "Gas Cutter Equipment", desc: "Cutting torches, nozzles, regulators and hoses — practical equipment for everyday workshop use." },
-      { slug: "welding-equipment", icon: Hammer, title: "Welding Equipment", desc: "Welding holders, regulators, flashback arrestors and consumables — sourced from established Indian brands." },
-      { slug: "safety-equipment", icon: ShieldAlert, title: "Industrial Safety Equipment", desc: "Helmets, gloves, goggles, aprons and fire safety items for workshops and industrial sites." },
+      { slug: "nitrogen", icon: FlaskConical, title: "Nitrogen Gas Supply",
+        desc: "High-purity nitrogen for laboratories, food packaging, electronics and inerting applications.",
+        bullets: ["High-purity N₂", "Cylinder & bulk", "Lab & industrial grade"],
+        placeholder: "Nitrogen Tank Installation" },
+      { slug: "helium", icon: Atom, title: "Helium Gas Supply",
+        desc: "Reliable helium for MRI installations, research labs and specialty industrial use.",
+        bullets: ["MRI-grade He", "Lab supply", "Specialty applications"],
+        placeholder: "Helium Cylinder Supply" },
+      { slug: "co2", icon: CircleDot, title: "CO₂ Gas Supply",
+        desc: "Food-grade and industrial CO₂ for beverages, fire systems, welding and process use.",
+        bullets: ["Food & industrial grade", "Cylinder & bulk", "Beverage plant supply"],
+        placeholder: "CO₂ Cylinder Storage" },
+      { slug: "welding-gas", icon: Zap, title: "Welding Gas",
+        desc: "Argon, CO₂ and mixed welding gases in standard cylinders with bulk pricing for project work.",
+        bullets: ["Argon, CO₂, mixtures", "Bulk pricing", "Project-site delivery"],
+        placeholder: "Welding Gas Equipment" },
+      { slug: "cutting-gas", icon: Flame, title: "Cutting Gas",
+        desc: "DA (acetylene), LPG and oxygen for gas cutting in tested, ISI-certified cylinders.",
+        bullets: ["DA, LPG, O₂", "Tested cylinders", "Workshop & site supply"],
+        placeholder: "Gas Cutting Setup" },
+      { slug: "carbide-tank", icon: Cylinder, title: "Carbide Tank",
+        desc: "Calcium carbide supply and tank servicing for acetylene generation in fabrication units.",
+        bullets: ["Calcium carbide supply", "Tank servicing", "Acetylene generation"],
+        placeholder: "Carbide Tank" },
+      { slug: "gas-cutter", icon: Flame, title: "Gas Cutter Equipment",
+        desc: "Cutting torches, nozzles, regulators and hoses for everyday workshop use.",
+        bullets: ["Torches & nozzles", "Regulators & hoses", "Indian-brand sourcing"],
+        placeholder: "Gas Cutter Equipment" },
+      { slug: "safety", icon: ShieldAlert, title: "Industrial Safety Equipment",
+        desc: "Helmets, gloves, goggles, aprons and fire-safety items for workshops and project sites.",
+        bullets: ["PPE & fire safety", "Workshop kits", "Bulk supply"],
+        placeholder: "Industrial Safety Equipment" },
     ],
   },
   {
     id: "refrigeration",
-    eyebrow: "06 · Refrigeration",
-    title: "Refrigeration & AC gas",
-    hindi: "रेफ्रिजरेशन एवं AC गैस",
-    intro:
-      "Refrigerant supply and refilling support for service technicians, AC dealers and cold-storage units.",
+    no: "03",
+    title: "Refrigeration Gas",
+    intro: "Refrigerant supply and refilling support for service technicians, AC dealers and cold-storage units.",
     items: [
-      { slug: "refrigeration-gas", icon: Snowflake, title: "Refrigeration Gas", desc: "Common refrigerants supplied in original packaging for service contractors and cold-storage operators." },
-      { slug: "ac-gas", icon: Snowflake, title: "AC Gas Refilling", desc: "AC gas supply for technicians handling home, commercial and automotive AC servicing." },
-      { slug: "fridge-gas", icon: Snowflake, title: "Fridge Gas Supply", desc: "Refrigerant supply for fridge repair technicians — small-quantity packs available." },
+      { slug: "ac-gas", icon: Snowflake, title: "AC Gas",
+        desc: "AC gas supply for technicians handling home, commercial and automotive AC servicing.",
+        bullets: ["Home, commercial, auto AC", "Original packaging", "Technician supply"],
+        placeholder: "AC Refrigerant Cylinder" },
+      { slug: "fridge-gas", icon: Snowflake, title: "Fridge Gas",
+        desc: "Refrigerant supply for fridge repair technicians — small-quantity packs available.",
+        bullets: ["Small packs", "Technician-friendly", "Common refrigerants"],
+        placeholder: "Fridge Gas Supply" },
+      { slug: "cooling-gas", icon: Snowflake, title: "Cooling Gas Supply",
+        desc: "Refrigerant supply for cold-storage units and commercial cooling installations.",
+        bullets: ["Cold-storage support", "Commercial cooling", "Bulk supply"],
+        placeholder: "Refrigeration Gas Support" },
     ],
   },
   {
-    id: "emergency",
-    eyebrow: "07 · Emergency",
-    title: "Emergency cylinder support",
-    hindi: "इमरजेंसी सिलेंडर सपोर्ट",
-    intro:
-      "A dedicated emergency desk for hospitals and critical patients — because oxygen cannot wait.",
+    id: "engineering",
+    no: "04",
+    title: "Engineering & Installation",
+    intro: "On-site engineering, erection and commissioning support — from a single tank to a full PSA plant.",
     items: [
-      { slug: "emergency-cylinder", icon: PhoneCall, title: "Emergency Cylinder Support", desc: "24×7 emergency dispatch of medical oxygen cylinders for hospitals and home patients across Saharsa and nearby districts." },
-      { slug: "priority-dispatch", icon: Truck, title: "Priority Hospital Dispatch", desc: "Standing arrangement for partner hospitals — priority refill and delivery during peak demand." },
+      { slug: "plant-erection", icon: HardHat, title: "Oxygen Plant Erection",
+        desc: "Mechanical erection, piping, pressure testing and commissioning of oxygen plants.",
+        bullets: ["Mechanical erection", "Piping & testing", "Commissioning"],
+        placeholder: "Oxygen Plant Erection" },
+      { slug: "tank-install", icon: Container, title: "Tank Installation & Commissioning",
+        desc: "Site survey, civil coordination, erection and commissioning of cryogenic and bulk gas tanks.",
+        bullets: ["Site survey", "Civil coordination", "Pressure testing"],
+        placeholder: "Liquid Oxygen Tank Setup" },
+      { slug: "lox-tank", icon: Container, title: "Liquid Oxygen Tank Setup",
+        desc: "Foundation review and installation of LOX storage tanks with vaporiser and control lines.",
+        bullets: ["LOX storage", "Vaporiser & controls", "Hospital & industrial"],
+        placeholder: "Liquid Oxygen Tank Installation" },
+      { slug: "plant-servicing", icon: Wrench, title: "Oxygen Plant Servicing",
+        desc: "Breakdown response, overhauling and spare-parts servicing — including third-party plants.",
+        bullets: ["Breakdown response", "Overhauling", "Spare parts"],
+        placeholder: "Oxygen Plant Servicing" },
+      { slug: "pipeline-maintenance", icon: Wrench, title: "Pipeline Maintenance",
+        desc: "Scheduled servicing, leak testing and AMC support for hospital and industrial gas pipelines.",
+        bullets: ["Leak testing", "AMC support", "Scheduled servicing"],
+        placeholder: "Pipeline Maintenance" },
+      { slug: "industrial-install", icon: Factory, title: "Industrial Installation Support",
+        desc: "Project-based installation support for industrial gas systems and fabrication units.",
+        bullets: ["Project support", "Industrial gas systems", "Multi-state work"],
+        placeholder: "Industrial Engineering Work" },
+      { slug: "n2-tank", icon: Container, title: "Nitrogen Tank Installation",
+        desc: "Bulk liquid nitrogen tank installation including transfer lines and venting setup.",
+        bullets: ["Bulk N₂ storage", "Transfer lines", "Venting setup"],
+        placeholder: "Nitrogen Tank Installation" },
+      { slug: "co2-tank", icon: Container, title: "CO₂ Tank Installation",
+        desc: "Bulk CO₂ storage tank installation for beverage plants, fabrication units and food processing.",
+        bullets: ["Bulk CO₂ tanks", "Beverage & food plants", "Commissioning"],
+        placeholder: "CO₂ Tank Installation" },
     ],
   },
 ];
 
-// Flat list for preview / SEO sitemap-style consumption
 export const services: Service[] = serviceCategories.flatMap((c) => c.items);
 
-// ---------- Realistic photo placeholder ----------
-function ImagePlaceholder({ label, hint }: { label: string; hint?: string }) {
+// ---------- Industrial placeholder image block ----------
+function ServiceImage({ label, ratio = "aspect-[4/3]" }: { label: string; ratio?: string }) {
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl ring-1 ring-border bg-[oklch(0.96_0.01_240)]">
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,oklch(0.94_0.015_240)_0%,oklch(0.98_0.005_240)_50%,oklch(0.93_0.02_220)_100%)]" />
-      <div
-        className="absolute inset-0 opacity-[0.08] mix-blend-multiply"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 1px, transparent 12px)",
-        }}
-      />
-      <div className="absolute inset-0 flex flex-col items-start justify-between p-4">
-        <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/55 bg-white/70 rounded-full px-2 py-1">
-          Photo · to be replaced
-        </span>
-        <div>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/55">{label}</div>
-          {hint && <div className="text-[10px] text-foreground/40 mt-0.5">{hint}</div>}
+    <div className={`relative ${ratio} w-full overflow-hidden bg-secondary border-b border-border`}>
+      <div className="absolute inset-0 opacity-25" style={{
+        backgroundImage: "repeating-linear-gradient(45deg, rgba(0,51,102,0.12) 0, rgba(0,51,102,0.12) 1px, transparent 1px, transparent 12px)",
+      }} />
+      <div className="absolute inset-0 flex items-center justify-center px-3">
+        <div className="text-center">
+          <ImageIcon className="h-7 w-7 mx-auto text-foreground/40" strokeWidth={1.2} />
+          <div className="mt-1.5 text-[9px] font-mono uppercase tracking-[0.18em] text-foreground/45">[REPLACE]</div>
+          <div className="mt-0.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--brand-navy)] leading-tight max-w-[180px] mx-auto">{label}</div>
         </div>
       </div>
     </div>
+  );
+}
+
+// ---------- Service card ----------
+function ServiceCard({ s }: { s: Service }) {
+  return (
+    <article className="group flex flex-col border border-border bg-white hover:shadow-elegant transition-shadow h-full">
+      <ServiceImage label={s.placeholder} />
+      <div className="p-5 flex flex-col flex-1">
+        <div className="flex items-start gap-3">
+          <div className="h-10 w-10 bg-[var(--brand-navy)] text-white flex items-center justify-center shrink-0">
+            <s.icon className="h-5 w-5" />
+          </div>
+          <h3 className="font-display font-bold uppercase text-[15px] leading-tight text-[var(--brand-navy)] tracking-tight">
+            {s.title}
+          </h3>
+        </div>
+        <p className="mt-3 text-[13px] text-foreground/70 leading-relaxed">{s.desc}</p>
+        <ul className="mt-3 space-y-1.5">
+          {s.bullets.map((b) => (
+            <li key={b} className="text-[12px] text-foreground/75 flex items-start gap-2">
+              <span className="mt-1.5 h-1 w-1 bg-[var(--brand-red)] shrink-0" />
+              {b}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-auto pt-4">
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--brand-navy)] hover:text-[var(--brand-red)] transition-colors"
+          >
+            Send Inquiry <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -172,63 +226,35 @@ function ImagePlaceholder({ label, hint }: { label: string; hint?: string }) {
 export function Services({ preview = false }: { preview?: boolean }) {
   const items = preview ? services.slice(0, 6) : services;
   return (
-    <section id="services" className="relative py-20 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-trust pointer-events-none" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
+    <section id="services" className="relative py-16 md:py-24 bg-white">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
-          <Reveal>
-            <div className="max-w-2xl">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">What we deliver</span>
-              <h2 className="mt-3 text-3xl md:text-5xl font-bold text-foreground text-balance leading-[1.05]">
-                Specialty gases and on-site support for{" "}
-                <span className="font-serif italic font-normal">hospitals</span> &amp; industry.
-              </h2>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-sm text-muted-foreground max-w-sm font-hindi">
-              अस्पतालों, लैब और उद्योगों के लिए सम्पूर्ण गैस समाधान — एक भरोसेमंद साझेदार।
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-14">
+          <div className="max-w-2xl">
+            <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--brand-red)]">Our Services</div>
+            <h2 className="mt-2 font-display font-bold uppercase text-3xl md:text-4xl text-[var(--brand-navy)] leading-tight">
+              Medical &amp; Industrial Gas — supply, installation, support.
+            </h2>
+            <p className="mt-3 text-muted-foreground max-w-xl">
+              Practical, documented services delivered with engineering discipline — for hospitals, industries and institutional clients.
             </p>
-          </Reveal>
+          </div>
+          {preview && (
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 border border-[var(--brand-navy)] text-[var(--brand-navy)] px-5 py-3 text-[12px] font-bold uppercase tracking-[0.1em] hover:bg-[var(--brand-navy)] hover:text-white transition-colors"
+            >
+              View All Services <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          )}
         </div>
 
-        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {items.map((s) => (
             <StaggerItem key={s.slug}>
-              <article className="group relative h-full rounded-3xl bg-white ring-1 ring-border p-6 md:p-7 hover:shadow-elegant hover:-translate-y-1 transition-all overflow-hidden">
-                <div className="flex items-start justify-between">
-                  <div className="h-11 w-11 rounded-xl bg-gradient-primary text-primary-foreground flex items-center justify-center shadow-soft">
-                    <s.icon className="h-5 w-5" />
-                  </div>
-                  {s.formula && (
-                    <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground border border-border rounded-full px-2.5 py-1">
-                      {s.formula}
-                    </span>
-                  )}
-                </div>
-                <div className="mt-5">
-                  <h3 className="font-bold text-foreground text-xl tracking-tight">{s.title}</h3>
-                  {s.hindi && <div className="font-hindi text-sm text-muted-foreground mt-1">{s.hindi}</div>}
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed text-pretty">{s.desc}</p>
-                </div>
-              </article>
+              <ServiceCard s={s} />
             </StaggerItem>
           ))}
         </Stagger>
-
-        {preview && (
-          <div className="mt-12 flex justify-center">
-            <Link
-              to="/services"
-              className="group inline-flex items-center gap-2 rounded-full bg-white ring-1 ring-border px-6 py-3 text-sm font-semibold text-foreground hover:shadow-soft transition-all"
-            >
-              View the full services list
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
-          </div>
-        )}
       </div>
     </section>
   );
@@ -237,66 +263,82 @@ export function Services({ preview = false }: { preview?: boolean }) {
 // ---------- Full categorized list (services page) ----------
 export function ServicesAll() {
   return (
-    <section className="relative py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-20 md:space-y-28">
-        {serviceCategories.map((cat, idx) => {
-          const reversed = idx % 2 === 1;
-          return (
-            <Reveal key={cat.id}>
-              <article className="grid md:grid-cols-12 gap-8 md:gap-14 items-start">
-                <div className={`md:col-span-5 ${reversed ? "md:order-2" : ""}`}>
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-                    {cat.eyebrow}
-                  </span>
-                  <h2 className="mt-3 text-2xl md:text-4xl font-bold text-foreground tracking-tight leading-[1.1] text-balance">
+    <section className="relative py-12 md:py-20 bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-16 md:space-y-24">
+        {serviceCategories.map((cat) => (
+          <Reveal key={cat.id}>
+            <article id={cat.id}>
+              <div className="flex items-end justify-between border-b-2 border-[var(--brand-navy)] pb-4 mb-8">
+                <div>
+                  <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-red)]">Category {cat.no}</div>
+                  <h2 className="mt-1.5 font-display font-bold uppercase text-2xl md:text-3xl text-[var(--brand-navy)] tracking-tight">
                     {cat.title}
                   </h2>
-                  {cat.hindi && <div className="font-hindi text-base text-muted-foreground mt-2">{cat.hindi}</div>}
-                  <p className="mt-4 text-muted-foreground leading-relaxed text-pretty max-w-md">
-                    {cat.intro}
-                  </p>
-                  <div className="mt-6">
-                    <ImagePlaceholder label={cat.title} hint="Replace with on-site / field photo" />
-                  </div>
                 </div>
-                <div className={`md:col-span-7 ${reversed ? "md:order-1" : ""}`}>
-                  <ul className="divide-y divide-border border-y border-border">
-                    {cat.items.map((s, i) => (
-                      <li key={s.slug} className="py-5 grid grid-cols-[auto_1fr_auto] items-start gap-4">
-                        <div className="h-10 w-10 rounded-xl bg-secondary ring-1 ring-border flex items-center justify-center text-foreground/80">
-                          <s.icon className="h-5 w-5" />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="flex flex-wrap items-baseline gap-x-2">
-                            <h3 className="text-base md:text-lg font-semibold text-foreground tracking-tight">
-                              {s.title}
-                            </h3>
-                            {s.hindi && (
-                              <span className="font-hindi text-xs text-muted-foreground">{s.hindi}</span>
-                            )}
-                          </div>
-                          <p className="mt-1 text-sm text-muted-foreground leading-relaxed text-pretty">
-                            {s.desc}
-                          </p>
-                        </div>
-                        <div className="hidden sm:flex flex-col items-end gap-1 pt-1">
-                          {s.formula && (
-                            <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground border border-border rounded-full px-2 py-0.5">
-                              {s.formula}
-                            </span>
-                          )}
-                          <span className="font-mono text-[10px] text-foreground/30 tabular-nums">
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                <span className="hidden md:inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground tabular-nums">
+                  {String(cat.items.length).padStart(2, "0")} services
+                </span>
+              </div>
+              <p className="text-foreground/75 max-w-3xl mb-8 text-pretty">{cat.intro}</p>
+              <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {cat.items.map((s) => (
+                  <StaggerItem key={s.slug}>
+                    <ServiceCard s={s} />
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ---------- Products & Equipment ----------
+const products = [
+  { name: "Carbide Tank", desc: "Calcium carbide supply and tank servicing.", placeholder: "Carbide Tank" },
+  { name: "Gas Cutter", desc: "Cutting torches, nozzles and accessories.", placeholder: "Gas Cutter Equipment" },
+  { name: "Welding Equipment", desc: "Holders, regulators, flashback arrestors, consumables.", placeholder: "Welding Equipment" },
+  { name: "Industrial Gas Equipment", desc: "Regulators, hoses, flow meters and fittings.", placeholder: "Industrial Gas Equipment" },
+  { name: "Cylinder Accessories", desc: "Valves, caps, trolleys and refill fittings.", placeholder: "Cylinder Accessories" },
+  { name: "Safety Equipment", desc: "Helmets, gloves, goggles, aprons, fire safety.", placeholder: "Industrial Safety Equipment" },
+  { name: "Refrigeration Gas Support", desc: "Refrigerants for cold storage and commercial cooling.", placeholder: "Refrigeration Gas Support" },
+  { name: "AC Gas Support", desc: "AC refrigerants for service technicians.", placeholder: "AC Gas Refilling" },
+];
+
+export function ProductsSection() {
+  return (
+    <section id="products" className="relative py-16 md:py-24 bg-secondary border-y border-border">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mb-10 md:mb-14 max-w-2xl">
+          <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--brand-red)]">Products &amp; Equipment</div>
+          <h2 className="mt-2 font-display font-bold uppercase text-3xl md:text-4xl text-[var(--brand-navy)] leading-tight">
+            Industrial equipment, cylinders &amp; accessories.
+          </h2>
+          <p className="mt-3 text-muted-foreground">
+            Sourced from established Indian brands. Available in standard packs for workshops, technicians and project sites.
+          </p>
+        </div>
+        <Stagger className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {products.map((p) => (
+            <StaggerItem key={p.name}>
+              <article className="bg-white border border-border flex flex-col h-full hover:shadow-elegant transition-shadow">
+                <ServiceImage label={p.placeholder} ratio="aspect-square" />
+                <div className="p-4 flex flex-col flex-1">
+                  <h3 className="font-display font-bold uppercase text-[13px] text-[var(--brand-navy)] tracking-tight">{p.name}</h3>
+                  <p className="mt-1.5 text-[12px] text-foreground/70 leading-relaxed">{p.desc}</p>
+                  <Link
+                    to="/contact"
+                    className="mt-auto pt-3 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)] hover:text-[var(--brand-red)] transition-colors"
+                  >
+                    Inquire <ArrowRight className="h-3 w-3" />
+                  </Link>
                 </div>
               </article>
-            </Reveal>
-          );
-        })}
+            </StaggerItem>
+          ))}
+        </Stagger>
       </div>
     </section>
   );

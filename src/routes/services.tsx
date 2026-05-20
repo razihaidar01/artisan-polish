@@ -1,13 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/site/Layout";
 import { PageHero } from "@/components/site/PageHero";
-import { ServicesAll } from "@/components/site/Services";
+import { ServicesAll, ProductsSection } from "@/components/site/Services";
 import { Coverage } from "@/components/site/Coverage";
-import { Hospitals } from "@/components/site/Hospitals";
 
 const TITLE = "Services — Medical Oxygen, Industrial Gas, Plant & Pipeline | Koshi Gas Agency";
-const DESC =
-  "Medical & industrial gas supply, oxygen plant installation, medical gas pipeline, ICU setup, tank commissioning, welding, cutting and refrigeration gases across Bihar.";
+const DESC = "Medical & industrial gas supply, oxygen plant installation, medical gas pipeline, ICU setup, tank commissioning, welding, cutting and refrigeration gases across Bihar.";
 
 export const Route = createFileRoute("/services")({
   component: ServicesPage,
@@ -31,17 +29,12 @@ function ServicesPage() {
     <Layout>
       <PageHero
         eyebrow="Services"
-        title={
-          <>
-            A working list of what we <span className="text-gradient">supply &amp; install</span>.
-          </>
-        }
+        title={<>What we supply, install &amp; service.</>}
         subtitle="From a single oxygen cylinder to a full hospital gas pipeline or PSA plant — practical, documented and on time."
       />
-
       <ServicesAll />
+      <ProductsSection />
       <Coverage />
-      <Hospitals />
     </Layout>
   );
 }

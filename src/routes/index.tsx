@@ -3,14 +3,13 @@ import { Layout } from "@/components/site/Layout";
 import { Hero } from "@/components/site/Hero";
 import { Trust } from "@/components/site/Trust";
 import { About } from "@/components/site/About";
-import { Services } from "@/components/site/Services";
+import { Services, ProductsSection } from "@/components/site/Services";
 import { Coverage } from "@/components/site/Coverage";
 import { Hospitals } from "@/components/site/Hospitals";
-import { Reveal } from "@/components/site/Reveal";
-import { ArrowUpRight, Phone } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 
 const SITE_TITLE = "Koshi Gas Agency — Medical & Industrial Gas Supply, Saharsa";
-const SITE_DESC = "Premium medical & industrial gas supply for hospitals, laboratories and industries across Saharsa, Bihar. Oxygen, Nitrogen, Helium with 24×7 emergency service.";
+const SITE_DESC = "Reliable medical and industrial gas supply, oxygen plant installation, hospital pipeline and tank commissioning across Bihar. 24×7 emergency support.";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -18,7 +17,7 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: SITE_TITLE },
       { name: "description", content: SITE_DESC },
-      { name: "keywords", content: "Koshi Gas Agency, Saharsa, Bihar, medical oxygen, industrial gas, nitrogen, helium, hospital gas supply, ISI cylinder, 24x7 oxygen Saharsa" },
+      { name: "keywords", content: "Koshi Gas Agency, Saharsa, Bihar, medical oxygen, industrial gas, nitrogen, helium, hospital gas pipeline, oxygen plant installation, 24x7 oxygen Saharsa" },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "geo.region", content: "IN-BR" },
       { name: "geo.placename", content: "Saharsa" },
@@ -43,6 +42,7 @@ export const Route = createFileRoute("/")({
           name: "Koshi Gas Agency",
           image: "/favicon.ico",
           telephone: ["+917004879171", "+919546756767", "+918709338784"],
+          email: "koshigasagency@gmail.com",
           priceRange: "₹₹",
           address: {
             "@type": "PostalAddress",
@@ -53,7 +53,7 @@ export const Route = createFileRoute("/")({
             addressCountry: "IN",
           },
           geo: { "@type": "GeoCoordinates", latitude: 25.8779, longitude: 86.5985 },
-          areaServed: "Saharsa, Bihar",
+          areaServed: "Bihar, India",
           openingHours: "Mo-Su 00:00-23:59",
           description: SITE_DESC,
           founder: { "@type": "Person", name: "Sanjay Singh" },
@@ -70,49 +70,37 @@ function Index() {
       <Trust />
       <About />
       <Services preview />
+      <ProductsSection />
       <Coverage />
       <Hospitals />
 
       {/* Final CTA */}
-      <section className="relative py-20 md:py-32 overflow-hidden bg-gradient-ink text-white">
-        <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
-        <div className="absolute -top-32 -right-20 h-[28rem] w-[28rem] rounded-full bg-primary-glow/30 blur-3xl" />
-        <div className="absolute -bottom-40 -left-20 h-[28rem] w-[28rem] rounded-full bg-primary/40 blur-3xl" />
-
+      <section className="relative py-16 md:py-24 bg-[var(--brand-navy)] text-white border-t-4 border-[var(--brand-red)]">
+        <div className="absolute inset-0 opacity-15" style={{
+          backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 14px)",
+        }} />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 text-center">
-          <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full glass-dark px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em]">
-              Talk to us today
-            </span>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-balance">
-              Need supply <span className="font-serif italic font-normal text-white/85">today</span>?{" "}
-              We're <span className="text-gradient">one call away</span>.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="font-hindi mt-5 text-base md:text-lg opacity-85 max-w-2xl mx-auto">
-              अभी अपनी गैस आवश्यकता हमें बताएं — एक कॉल पर तेज़ डिलीवरी।
-            </p>
-          </Reveal>
-          <Reveal delay={0.3}>
-            <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Link
-                to="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-white text-foreground px-7 py-4 text-sm md:text-base font-semibold shadow-elegant hover:shadow-glow transition-all hover:-translate-y-0.5"
-              >
-                Get a quote
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
-              <a
-                href="tel:7004879171"
-                className="inline-flex items-center gap-2 rounded-full glass-dark text-white px-7 py-4 text-sm md:text-base font-semibold hover:bg-white/15 transition-colors"
-              >
-                <Phone className="h-4 w-4" /> 7004879171
-              </a>
-            </div>
-          </Reveal>
+          <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Contact Now</div>
+          <h2 className="mt-3 font-display font-bold uppercase text-3xl md:text-5xl leading-tight tracking-tight">
+            Need supply or engineering support today?
+          </h2>
+          <p className="mt-4 text-white/75 max-w-2xl mx-auto">
+            One call connects you to our dispatch and engineering desk — 24×7 for hospitals and industrial clients.
+          </p>
+          <div className="mt-7 flex flex-wrap justify-center gap-2.5">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 bg-[var(--brand-red)] text-white px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.1em] hover:bg-[#b30000] transition-colors"
+            >
+              Send Inquiry <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <a
+              href="tel:7004879171"
+              className="inline-flex items-center gap-2 bg-white text-[var(--brand-navy)] px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.1em] hover:bg-secondary transition-colors"
+            >
+              <Phone className="h-4 w-4" /> +91 7004879171
+            </a>
+          </div>
         </div>
       </section>
     </Layout>

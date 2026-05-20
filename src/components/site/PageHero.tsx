@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
 import { Reveal } from "./Reveal";
+import { ChevronRight } from "lucide-react";
 
 export function PageHero({
   eyebrow,
@@ -13,33 +15,33 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative pt-32 md:pt-44 pb-16 md:pb-24 overflow-hidden bg-gradient-hero">
-      <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
-      <div className="absolute inset-0 noise opacity-[0.3] mix-blend-multiply pointer-events-none" />
-      <div className="absolute -top-32 -left-24 h-96 w-96 rounded-full bg-gradient-mesh blur-3xl opacity-70" />
-      <div className="absolute -bottom-40 -right-20 h-[26rem] w-[26rem] rounded-full bg-primary-glow/20 blur-3xl" />
-
-      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 text-center">
+    <section className="relative pt-28 md:pt-36 pb-12 md:pb-16 bg-[var(--brand-navy)] text-white border-b-4 border-[var(--brand-red)] overflow-hidden">
+      <div className="absolute inset-0 opacity-20" style={{
+        backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 14px)",
+      }} />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
-          <span className="inline-flex items-center gap-2 rounded-full glass px-3.5 py-1.5 text-[11px] font-semibold text-primary uppercase tracking-[0.18em] shadow-soft">
-            {eyebrow}
-          </span>
+          <nav className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.14em] text-white/60">
+            <Link to="/" className="hover:text-white">Home</Link>
+            <ChevronRight className="h-3 w-3" />
+            <span className="text-white">{eyebrow}</span>
+          </nav>
         </Reveal>
-        <Reveal delay={0.1}>
-          <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] text-foreground text-balance tracking-tight">
+        <Reveal delay={0.05}>
+          <h1 className="mt-4 font-display font-bold uppercase text-3xl sm:text-5xl md:text-6xl leading-[1.05] tracking-tight text-white text-balance max-w-4xl">
             {title}
           </h1>
         </Reveal>
         {subtitle && (
-          <Reveal delay={0.2}>
-            <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <Reveal delay={0.1}>
+            <p className="mt-5 text-base md:text-lg text-white/75 max-w-2xl text-pretty">
               {subtitle}
             </p>
           </Reveal>
         )}
         {children && (
-          <Reveal delay={0.3}>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">{children}</div>
+          <Reveal delay={0.15}>
+            <div className="mt-7 flex flex-wrap gap-2.5">{children}</div>
           </Reveal>
         )}
       </div>
